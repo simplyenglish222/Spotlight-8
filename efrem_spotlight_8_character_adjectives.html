@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Efrem • Character Adjectives</title>
+<style>
+:root{
+  --bg:#0f172a; --panel:#172033; --panel2:#111827; --text:#f8fafc;
+  --muted:#b8c2d3; --line:#334155; --accent:#7dd3fc; --good:#86efac;
+  --bad:#fca5a5; --gold:#fde68a; --white:#fff;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  background:linear-gradient(180deg,#0b1220,#111827 45%,#0b1220);
+  color:var(--text); line-height:1.45;
+}
+.wrap{max-width:900px;margin:auto;padding:18px 14px 60px}
+header{
+  border:1px solid var(--line); background:rgba(23,32,51,.94);
+  padding:18px; border-radius:20px; margin-bottom:16px;
+}
+h1{font-size:clamp(26px,6vw,42px);margin:0 0 8px}
+h2{font-size:clamp(21px,5vw,28px);margin:0 0 10px}
+h3{margin:0 0 8px}
+p{margin:7px 0}
+.small{color:var(--muted);font-size:.95rem}
+.goal{padding:10px 12px;border-left:4px solid var(--accent);background:#0f1b2e;border-radius:10px;margin-top:12px}
+.section{
+  border:1px solid var(--line); background:rgba(23,32,51,.94);
+  padding:16px; border-radius:20px; margin:16px 0;
+}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.card{
+  border:1px solid var(--line); background:var(--panel2); border-radius:16px;
+  padding:14px; min-height:150px; position:relative;
+}
+.word{font-size:1.3rem;font-weight:800}
+.ru{
+  display:none; color:var(--gold); font-size:1.08rem; font-weight:700;
+  margin:7px 0;
+}
+.example{color:#dbeafe;margin-top:8px}
+button{
+  appearance:none;border:1px solid #475569;background:#1e293b;color:var(--text);
+  padding:9px 12px;border-radius:12px;font-weight:700;cursor:pointer;
+}
+button:active{transform:scale(.98)}
+.btnrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.reveal{border-color:#64748b}
+.audio{border-color:#0ea5e9}
+.tag{display:inline-block;font-size:.75rem;padding:3px 8px;border-radius:999px;margin-top:8px}
+.pos{background:#12351f;color:#bbf7d0}
+.neg{background:#3b1717;color:#fecaca}
+.neu{background:#243148;color:#dbeafe}
+.quiz{
+  border:1px solid var(--line); background:#0f172a; padding:13px;
+  border-radius:14px; margin:10px 0;
+}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.options button{text-align:left}
+.feedback{min-height:24px;margin-top:8px;font-weight:800}
+.ok{color:var(--good)} .no{color:var(--bad)}
+.prompt{
+  padding:12px;border:1px dashed #64748b;border-radius:14px;background:#111827;margin:10px 0
+}
+.frame{
+  font-size:1.08rem;font-weight:800;color:#e0f2fe;margin:5px 0
+}
+.progress{
+  height:11px;background:#111827;border:1px solid #334155;border-radius:999px;overflow:hidden;margin-top:10px
+}
+.bar{height:100%;width:0;background:#7dd3fc;transition:.25s}
+footer{color:#94a3b8;text-align:center;margin-top:26px;font-size:.9rem}
+@media(max-width:620px){
+  .wrap{padding:10px 10px 40px}
+  .grid{grid-template-columns:1fr}
+  .options{grid-template-columns:1fr}
+  .section,header{border-radius:16px;padding:14px}
+  button{min-height:44px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="small">Spotlight 8 • Unit 1a • Efrem</div>
+  <h1>Character adjectives</h1>
+  <p>Learn the words first. Then use them to talk about yourself, friends and family.</p>
+  <div class="goal"><b>Lesson goal:</b> say 4–6 simple sentences about people.</div>
+  <div class="progress"><div class="bar" id="bar"></div></div>
+  <p class="small" id="progressText">0 / 13 words opened</p>
+</header>
+
+<section class="section">
+  <h2>1. Learn the words</h2>
+  <p class="small">Tap <b>Russian</b> if you need help. Tap 🔊 to hear the English word.</p>
+  <div class="grid" id="cards"></div>
+</section>
+
+<section class="section">
+  <h2>2. Quick check</h2>
+  <p class="small">Choose the correct adjective. No literary analysis required. Humanity survives.</p>
+  <div id="quiz"></div>
+</section>
+
+<section class="section">
+  <h2>3. Positive or negative?</h2>
+  <p>Say the answer first. Then click to check.</p>
+  <div id="sort"></div>
+</section>
+
+<section class="section">
+  <h2>4. Speak about real people</h2>
+  <p class="small"><b>TRY TO DO ORALLY.</b> Use the sentence frame if necessary.</p>
+
+  <div class="prompt">
+    <h3>About you</h3>
+    <div class="frame">I am quite ______.</div>
+    <div class="frame">I am not very ______.</div>
+    <p class="small">Example: <b>I am quite shy, but I am also patient.</b></p>
+  </div>
+
+  <div class="prompt">
+    <h3>Your friend</h3>
+    <div class="frame">My friend is ______ because he/she ______.</div>
+    <p class="small">Example: <b>My friend is reliable because he always helps me.</b></p>
+  </div>
+
+  <div class="prompt">
+    <h3>Your family</h3>
+    <div class="frame">My ______ is very ______.</div>
+    <p class="small">Example: <b>My brother is stubborn. He always wants to do things his own way.</b></p>
+  </div>
+
+  <div class="prompt">
+    <h3>Choose</h3>
+    <p>What is more important in a friend?</p>
+    <div class="frame">honest / sociable / caring / reliable / patient</div>
+    <p class="small">Example: <b>I think a good friend should be honest and reliable.</b></p>
+  </div>
+</section>
+
+<section class="section">
+  <h2>5. Final challenge</h2>
+  <p>Speak for about 30 seconds. Use at least <b>4 adjectives</b>.</p>
+  <div class="prompt">
+    <div class="frame">I am ...</div>
+    <div class="frame">My best friend is ...</div>
+    <div class="frame">In my family, ... is ...</div>
+    <div class="frame">I think a good friend should be ...</div>
+  </div>
+</section>
+
+<footer>Tap, listen, speak, repeat. Glamorous? No. Effective? Much more likely.</footer>
+</div>
+
+<script>
+const words = [
+ {w:"optimistic", ru:"оптимистичный", ex:"He always looks on the bright side of life.", tag:"positive"},
+ {w:"sensitive", ru:"чувствительный", ex:"He understands how other people feel.", tag:"positive"},
+ {w:"caring", ru:"заботливый", ex:"She cares about other people.", tag:"positive"},
+ {w:"calm", ru:"спокойный", ex:"He stays calm in difficult situations.", tag:"positive"},
+ {w:"patient", ru:"терпеливый", ex:"She can wait and does not get angry easily.", tag:"positive"},
+ {w:"easy-going", ru:"лёгкий в общении, спокойный", ex:"He is relaxed and does not get upset easily.", tag:"positive"},
+ {w:"sociable", ru:"общительный", ex:"She likes meeting and talking to people.", tag:"positive"},
+ {w:"honest", ru:"честный", ex:"He tells the truth.", tag:"positive"},
+ {w:"reliable", ru:"надёжный", ex:"You can trust her.", tag:"positive"},
+ {w:"stubborn", ru:"упрямый", ex:"She always wants to do things her own way.", tag:"negative"},
+ {w:"selfish", ru:"эгоистичный", ex:"He does not care about other people's feelings.", tag:"negative"},
+ {w:"shy", ru:"стеснительный", ex:"He does not feel comfortable with new people.", tag:"negative"},
+ {w:"confident", ru:"уверенный в себе", ex:"She is not afraid to speak to new people.", tag:"positive"}
+];
+
+const opened = new Set(JSON.parse(localStorage.getItem("efremAdjOpened") || "[]"));
+const cards = document.getElementById("cards");
+
+function speak(text){
+  if(!("speechSynthesis" in window)) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang="en-GB"; u.rate=.82;
+  speechSynthesis.speak(u);
+}
+function updateProgress(){
+  document.getElementById("bar").style.width = (opened.size/words.length*100)+"%";
+  document.getElementById("progressText").textContent = `${opened.size} / ${words.length} words opened`;
+  localStorage.setItem("efremAdjOpened", JSON.stringify([...opened]));
+}
+words.forEach((x,i)=>{
+  const d=document.createElement("div");
+  d.className="card";
+  d.innerHTML=`
+    <div class="word">${x.w}</div>
+    <span class="tag ${x.tag==="positive"?"pos":"neg"}">${x.tag}</span>
+    <div class="ru" id="ru${i}">${x.ru}</div>
+    <div class="example">${x.ex}</div>
+    <div class="btnrow">
+      <button class="reveal" onclick="toggleRU(${i})">Russian</button>
+      <button class="audio" onclick="speak('${x.w.replaceAll("'","\\'")}')">🔊 Word</button>
+      <button class="audio" onclick="speak('${x.ex.replaceAll("'","\\'")}')">🔊 Example</button>
+    </div>`;
+  cards.appendChild(d);
+});
+function toggleRU(i){
+  const e=document.getElementById("ru"+i);
+  e.style.display=e.style.display==="block"?"none":"block";
+  opened.add(i); updateProgress();
+}
+updateProgress();
+
+const qs = [
+ ["He likes meeting new people.","sociable","shy"],
+ ["You can trust her.","reliable","selfish"],
+ ["He always tells the truth.","honest","stubborn"],
+ ["She can wait without getting angry.","patient","sensitive"],
+ ["He does not care about other people's feelings.","selfish","caring"],
+ ["She feels uncomfortable with new people.","shy","confident"],
+ ["He stays relaxed in difficult situations.","calm","stubborn"],
+ ["She always wants to do things her own way.","stubborn","easy-going"],
+ ["He believes good things will happen.","optimistic","selfish"],
+ ["She understands people's feelings.","sensitive","sociable"]
+];
+const quiz=document.getElementById("quiz");
+qs.forEach((q,i)=>{
+ const box=document.createElement("div"); box.className="quiz";
+ box.innerHTML=`<b>${i+1}. ${q[0]}</b>
+ <div class="options">
+   <button onclick="checkQ(this,${i},'${q[1]}')">${q[1]}</button>
+   <button onclick="checkQ(this,${i},'${q[2]}')">${q[2]}</button>
+ </div>
+ <div class="feedback" id="f${i}"></div>`;
+ quiz.appendChild(box);
+});
+function checkQ(btn,i,answer){
+ const chosen=btn.textContent;
+ const f=document.getElementById("f"+i);
+ if(chosen===answer){f.textContent="✓ Correct"; f.className="feedback ok";}
+ else{f.textContent="✗ Try again"; f.className="feedback no";}
+ speak(chosen);
+}
+
+const sortWords=["optimistic","reliable","stubborn","selfish","patient","sociable","shy","honest"];
+const sort=document.getElementById("sort");
+sortWords.forEach((w,i)=>{
+ const x=words.find(a=>a.w===w);
+ const box=document.createElement("div"); box.className="quiz";
+ box.innerHTML=`<b>${w}</b>
+ <div class="options">
+ <button onclick="sortCheck(${i},'positive','${x.tag}')">positive</button>
+ <button onclick="sortCheck(${i},'negative','${x.tag}')">negative</button>
+ </div><div class="feedback" id="s${i}"></div>`;
+ sort.appendChild(box);
+});
+function sortCheck(i,chosen,answer){
+ const f=document.getElementById("s"+i);
+ if(chosen===answer){f.textContent="✓ Correct"; f.className="feedback ok";}
+ else{f.textContent="✗ Try again"; f.className="feedback no";}
+}
+</script>
+</body>
+</html>
