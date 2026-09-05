@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Spotlight 8 • Breaking the Ice</title>
+<style>
+:root {
+  --bg:#07101d; --panel:#101d31; --paper:#fff7c7; --ink:#182230;
+  --blue:#315b9d; --blue2:#203d70; --line:#33516f; --gold:#ffe082;
+}
+*{box-sizing:border-box}
+body {
+  margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  background:linear-gradient(180deg,#07101d,#0c1727); color:#f8fafc;
+}
+.wrap{max-width:1040px;margin:auto;padding:14px 12px 48px}
+header {
+  background:linear-gradient(135deg,#183a6b,#102440);
+  border:1px solid #365a82;border-radius:22px;padding:19px;margin-bottom:16px;
+}
+.kicker{color:#bfe3ff;font-weight:800} h1{margin:4px 0 7px;font-size:clamp(29px,6vw,46px)}
+header p{color:#d6e5f5;margin:5px 0}
+.article {
+  background:linear-gradient(180deg,#fff9d9,#fff1a9); color:var(--ink);
+  border:5px solid #72bde8;border-radius:20px;padding:18px;
+  box-shadow:0 12px 28px rgba(0,0,0,.25);
+}
+.article-block{column-count:1}
+.article p,.tip-block p{font-size:clamp(17px,2.2vw,20px);line-height:1.72;margin:10px 0}
+.tip-block{margin-top:15px;padding-top:11px;border-top:1px solid #e4cc68}
+.tip-block h3 {
+  display:inline-block;margin:0 0 3px;background:#7567bb;color:white;
+  border-radius:999px;padding:5px 11px;font-size:1rem;
+}
+.word {
+  cursor:pointer;border-radius:5px;padding:1px 1px;
+  transition:.15s;background:transparent;
+}
+.word:hover,.word:focus{background:#dbeafe;outline:none;color:#12233b}
+.word.seen{text-decoration:underline;text-decoration-color:#7a6dcc;text-decoration-thickness:2px}
+.instructions {
+  background:#10203a;border:1px solid #34526f;border-radius:18px;padding:14px;margin:16px 0;
+}
+.instructions b{color:#a5ddff}
+.phrases {
+  background:#101d31;border:1px solid #304c69;border-radius:18px;padding:15px;margin-top:16px;
+}
+.phrase-grid{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.phrase {
+  appearance:none;background:#172c49;border:1px solid #4e759b;color:#fff;
+  border-radius:999px;padding:9px 12px;font-weight:800;cursor:pointer;
+}
+.phrase:hover{background:#204166}
+.popup {
+  position:fixed;left:50%;bottom:18px;transform:translateX(-50%);
+  width:min(650px,calc(100vw - 20px));background:#0c1728;color:white;
+  border:1px solid #52759b;border-radius:18px;padding:14px 15px;z-index:30;
+  box-shadow:0 18px 40px rgba(0,0,0,.48);display:none;
+}
+.pop-word{font-size:1.45rem;font-weight:900;color:#dff3ff}
+.pop-ru{font-size:1.05rem;color:#ffe59a;margin-top:4px}
+.pop-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+button.action {
+  appearance:none;background:#193252;color:#fff;border:1px solid #557da6;
+  border-radius:11px;padding:9px 12px;font-weight:800;cursor:pointer;min-height:42px;
+}
+.stats{color:#b9cbe0;font-size:.93rem;margin-top:8px}
+@media(min-width:820px){
+  .article{padding:22px 26px}
+  .article-block{column-count:2;column-gap:30px}
+}
+@media(max-width:560px){
+  .wrap{padding:9px 8px 38px}
+  header,.article,.instructions,.phrases{border-radius:15px}
+  .article{padding:14px 12px;border-width:3px}
+  .article p,.tip-block p{font-size:17px;line-height:1.78}
+  .popup{bottom:8px}
+  button.action,.phrase{min-height:46px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="kicker">Spotlight 8 • Unit 1a • Efrem</div>
+  <h1>Breaking the Ice</h1>
+  <p>Interactive reading. Every English word in the text is clickable.</p>
+</header>
+
+<div class="instructions">
+  <b>How to use:</b> Click any word → see the Russian meaning → hear the English pronunciation.
+  For weak vocabulary, useful multi-word expressions are also collected below.
+  <div class="stats" id="stats">Words clicked: 0</div>
+</div>
+
+<main class="article">
+  <div class="article-block"><p><span class="word" tabindex="0" data-word="The" data-ru="определённый артикль">The</span> <span class="word" tabindex="0" data-word="new" data-ru="новый">new</span> <span class="word" tabindex="0" data-word="girl" data-ru="девочка, девушка">girl</span> <span class="word" tabindex="0" data-word="in" data-ru="в">in</span> <span class="word" tabindex="0" data-word="your" data-ru="твой / ваш">your</span> <span class="word" tabindex="0" data-word="class" data-ru="класс">class</span> <span class="word" tabindex="0" data-word="seems" data-ru="кажется">seems</span> <span class="word" tabindex="0" data-word="very" data-ru="очень">very</span> <span class="word" tabindex="0" data-word="interesting" data-ru="интересный">interesting</span> <span class="word" tabindex="0" data-word="and" data-ru="и">and</span> <span class="word" tabindex="0" data-word="you" data-ru="ты / вы">you</span> <span class="word" tabindex="0" data-word="would" data-ru="бы / хотел бы">would</span> <span class="word" tabindex="0" data-word="like" data-ru="нравиться / как">like</span> <span class="word" tabindex="0" data-word="to" data-ru="к / чтобы / показатель инфинитива">to</span> <span class="word" tabindex="0" data-word="get" data-ru="получать; становиться; добираться">get</span> <span class="word" tabindex="0" data-word="to" data-ru="к / чтобы / показатель инфинитива">to</span> <span class="word" tabindex="0" data-word="know" data-ru="знать">know</span> <span class="word" tabindex="0" data-word="her" data-ru="её / ей">her</span> <span class="word" tabindex="0" data-word="better" data-ru="лучше">better</span>. <span class="word" tabindex="0" data-word="The" data-ru="определённый артикль">The</span> <span class="word" tabindex="0" data-word="guy" data-ru="парень">guy</span> <span class="word" tabindex="0" data-word="at" data-ru="в / на">at</span> <span class="word" tabindex="0" data-word="the" data-ru="определённый артикль">the</span> <span class="word" tabindex="0" data-word="skate" data-ru="скейт / кататься на скейте">skate</span> <span class="word" tabindex="0" data-word="park" data-ru="парк">park</span> <span class="word" tabindex="0" data-word="does" data-ru="делает / вспомогательный глагол">does</span> <span class="word" tabindex="0" data-word="some" data-ru="некоторые / немного">some</span> <span class="word" tabindex="0" data-word="amazing" data-ru="удивительный, потрясающий">amazing</span> <span class="word" tabindex="0" data-word="tricks" data-ru="трюки">tricks</span> <span class="word" tabindex="0" data-word="and" data-ru="и">and</span> <span class="word" tabindex="0" data-word="you" data-ru="ты / вы">you</span> <span class="word" tabindex="0" data-word="would" data-ru="бы / хотел бы">would</span> <span class="word" tabindex="0" data-word="like" data-ru="нравиться / как">like</span> <span class="word" tabindex="0" data-word="him" data-ru="его / ему">him</span> <span class="word" tabindex="0" data-word="to" data-ru="к / чтобы / показатель инфинитива">to</span> <span class="word" tabindex="0" data-word="show" data-ru="показывать">show</span> <span class="word" tabindex="0" data-word="you" data-ru="ты / вы">you</span> <span class="word" tabindex="0" data-word="how" data-ru="как">how</span>. <span class="word" tabindex="0" data-word="But" data-ru="но">But</span>, <span class="word" tabindex="0" data-word="whenever" data-ru="всякий раз, когда">whenever</span> <span class="word" tabindex="0" data-word="the" data-ru="определённый артикль">the</span> <span class="word" tabindex="0" data-word="opportunity" data-ru="возможность">opportunity</span> <span class="word" tabindex="0" data-word="to" data-ru="к / чтобы / показатель инфинитива">to</span> <span class="word" tabindex="0" data-word="talk" data-ru="говорить, разговаривать">talk</span> <span class="word" tabindex="0" data-word="to" data-ru="к / чтобы / показатель инфинитива">to</span> <span class="word" tabindex="0" data-word="them" data-ru="их / им">them</span> <span class="word" tabindex="0" data-word="comes" data-ru="приходит; comes up — возникает">comes</span> <span class="word" tabindex="0" data-word="up" data-ru="вверх; come up — возникать">up</span>, <span class="word" tabindex="0" data-word="you" data-ru="ты / вы">you</span> <span class="word" tabindex="0" data-word="can’t" data-ru="не мочь">can’t</span> <span class="word" tabindex="0" data-word="think" data-ru="думать">think</span> <span class="word" tabindex="0" data-word="of" data-ru="из / родительный падеж">of</span> <span class="word" tabindex="0" data-word="anything" data-ru="что-нибудь / что-либо">anything</span> <span class="word" tabindex="0" data-word="to" data-ru="к / чтобы / показатель инфинитива">to</span> <span class="word" tabindex="0" data-word="say" data-ru="сказать">say</span>. <span class="word" tabindex="0" data-word="Your" data-ru="твой / ваш">Your</span> <span class="word" tabindex="0" data-word="palms" data-ru="ладони">palms</span> <span class="word" tabindex="0" data-word="sweat" data-ru="потеть">sweat</span>, <span class="word" tabindex="0" data-word="you" data-ru="ты / вы">you</span> <span class="word" tabindex="0" data-word="blush" data-ru="краснеть">blush</span>, <span class="word" tabindex="0" data-word="and" data-ru="и">and</span> <span class="word" tabindex="0" data-word="you" data-ru="ты / вы">you</span> <span class="word" tabindex="0" data-word="look" data-ru="смотреть / выглядеть">look</span> <span class="word" tabindex="0" data-word="away" data-ru="прочь / в сторону">away</span>.</p><p><span class="word" tabindex="0" data-word="Whether" data-ru="ли / независимо от того,">Whether</span> <span class="word" tabindex="0" data-word="you" data-ru="ты / вы">you</span> <span class="word" tabindex="0" data-word="are" data-ru="являются / есть">are</span> <span class="word" tabindex="0" data-word="starting" data-ru="начиная / начинающий">starting</span> <span class="word" tabindex="0" data-word="a" data-ru="неопределённый артикль / один">a</span> <span class="word" tabindex="0" data-word="new" data-ru="новый">new</span> <span class="word" tabindex="0" data-word="school" data-ru="школа">school</span>, <span class="word" tabindex="0" data-word="going" data-ru="идущий / собирающийся">going</span> <span class="word" tabindex="0" data-word="to" data-ru="к / чтобы / показатель инфинитива">to</span> <span class="word" tabindex="0" data-word="a" data-ru="неопределённый артикль / один">a</span> <span class="word" tabindex="0" data-word="party" data-ru="вечеринка">party</span> <span class="word" tabindex="0" data-word="where" data-ru="где">where</span> <span class="word" tabindex="0" data-word="you" data-ru="ты / вы">you</span> <span class="word" tabindex="0" data-word="don&#x27;t" data-ru="не / не делай">don&#x27;t</span> <span class="word" tabindex="0" data-word="know" data-ru="знать">know</span> <span class="word" tabindex="0" data-word="anyone" data-ru="кто-нибудь / кто-либо">anyone</span> <span class="word" tabindex="0" data-word="or" data-ru="или">or</span> <span class="word" tabindex="0" data-word="want" data-ru="хотеть">want</span> <span class="word" tabindex="0" data-word="to" data-ru="к / чтобы / показатель инфинитива">to</span> <span class="word" tabindex="0" data-word="approach" data-ru="подойти к">approach</span> <span class="word" tabindex="0" data-word="a" data-ru="неопределённый артикль / один">a</span> <span class="word" tabindex="0" data-word="person" data-ru="человек">person</span> <span class="word" tabindex="0" data-word="you" data-ru="ты / вы">you</span> <span class="word" tabindex="0" data-word="fancy" data-ru="нравиться, испытывать симпатию">fancy</span>, <span class="word" tabindex="0" data-word="you" data-ru="ты / вы">you</span> <span class="word" tabindex="0" data-word="often" data-ru="часто">often</span> <span class="word" tabindex="0" data-word="need" data-ru="нужно / нуждаться">need</span> <span class="word" tabindex="0" data-word="to" data-ru="к / чтобы / показатель инфинитива">to</span> <span class="word" tabindex="0" data-word="break" data-ru="сломать; в выражении break the ice — начать общение">break</span> <span class="word" tabindex="0" data-word="the" data-ru="определённый артикль">the</span> <span class="word" tabindex="0" data-word="ice" data-ru="лёд">ice</span> <span class="word" tabindex="0" data-word="in" data-ru="в">in</span> <span class="word" tabindex="0" data-word="order" data-ru="порядок; in order to — чтобы">order</span> <span class="word" tabindex="0" data-word="to" data-ru="к / чтобы / показатель инфинитива">to</span> <span class="word" tabindex="0" data-word="start" data-ru="начинать">start</span> <span class="word" tabindex="0" data-word="a" data-ru="неопределённый артикль / один">a</span> <span class="word" tabindex="0" data-word="friendly" data-ru="дружелюбный">friendly</span> <span class="word" tabindex="0" data-word="conversation" data-ru="разговор, беседа">conversation</span>. <span class="word" tabindex="0" data-word="Breaking" data-ru="разбивание; breaking the ice — начало общения">Breaking</span> <span class="word" tabindex="0" data-word="the" data-ru="определённый артикль">the</span> <span class="word" tabindex="0" data-word="ice" data-ru="лёд">ice</span> <span class="word" tabindex="0" data-word="means" data-ru="означает">means</span> <span class="word" tabindex="0" data-word="saying" data-ru="говоря / высказывание">saying</span> <span class="word" tabindex="0" data-word="or" data-ru="или">or</span> <span class="word" tabindex="0" data-word="doing" data-ru="делание / делая">doing</span> <span class="word" tabindex="0" data-word="something" data-ru="что-то">something</span> <span class="word" tabindex="0" data-word="to" data-ru="к / чтобы / показатель инфинитива">to</span> <span class="word" tabindex="0" data-word="stop" data-ru="останавливать">stop</span> <span class="word" tabindex="0" data-word="feeling" data-ru="чувство / ощущение">feeling</span> <span class="word" tabindex="0" data-word="shy" data-ru="стеснительный">shy</span> <span class="word" tabindex="0" data-word="or" data-ru="или">or</span> <span class="word" tabindex="0" data-word="uncomfortable" data-ru="неловко, некомфортно">uncomfortable</span> <span class="word" tabindex="0" data-word="around" data-ru="вокруг / рядом с">around</span> <span class="word" tabindex="0" data-word="someone" data-ru="кто-то">someone</span> <span class="word" tabindex="0" data-word="you" data-ru="ты / вы">you</span> <span class="word" tabindex="0" data-word="don&#x27;t" data-ru="не / не делай">don&#x27;t</span> <span class="word" tabindex="0" data-word="know" data-ru="знать">know</span> <span class="word" tabindex="0" data-word="very" data-ru="очень">very</span> <span class="word" tabindex="0" data-word="well" data-ru="хорошо">well</span>. <span class="word" tabindex="0" data-word="The" data-ru="определённый артикль">The</span> <span class="word" tabindex="0" data-word="reason" data-ru="причина">reason</span> <span class="word" tabindex="0" data-word="you" data-ru="ты / вы">you</span> <span class="word" tabindex="0" data-word="feel" data-ru="чувствовать">feel</span> <span class="word" tabindex="0" data-word="this" data-ru="это / этот">this</span> <span class="word" tabindex="0" data-word="way" data-ru="способ / путь">way</span> <span class="word" tabindex="0" data-word="is" data-ru="есть / является">is</span> <span class="word" tabindex="0" data-word="that" data-ru="что / тот">that</span> <span class="word" tabindex="0" data-word="you" data-ru="ты / вы">you</span> <span class="word" tabindex="0" data-word="don&#x27;t" data-ru="не / не делай">don&#x27;t</span> <span class="word" tabindex="0" data-word="know" data-ru="знать">know</span> <span class="word" tabindex="0" data-word="how" data-ru="как">how</span> <span class="word" tabindex="0" data-word="the" data-ru="определённый артикль">the</span> <span class="word" tabindex="0" data-word="other" data-ru="другой">other</span> <span class="word" tabindex="0" data-word="person" data-ru="человек">person</span> <span class="word" tabindex="0" data-word="will" data-ru="будет / будут">will</span> <span class="word" tabindex="0" data-word="react" data-ru="реагировать">react</span>, <span class="word" tabindex="0" data-word="but" data-ru="но">but</span> <span class="word" tabindex="0" data-word="don&#x27;t" data-ru="не / не делай">don&#x27;t</span> <span class="word" tabindex="0" data-word="let" data-ru="позволять">let</span> <span class="word" tabindex="0" data-word="it" data-ru="это / оно">it</span> <span class="word" tabindex="0" data-word="get" data-ru="получать; становиться; добираться">get</span> <span class="word" tabindex="0" data-word="you" data-ru="ты / вы">you</span> <span class="word" tabindex="0" data-word="down" data-ru="вниз; get you down — расстраивать">down</span>.</p><p><span class="word" tabindex="0" data-word="You" data-ru="ты / вы">You</span> <span class="word" tabindex="0" data-word="shouldn&#x27;t" data-ru="не следует">shouldn&#x27;t</span> <span class="word" tabindex="0" data-word="worry" data-ru="беспокоиться">worry</span>. <span class="word" tabindex="0" data-word="Almost" data-ru="почти">Almost</span> <span class="word" tabindex="0" data-word="everyone" data-ru="все, каждый">everyone</span> <span class="word" tabindex="0" data-word="feels" data-ru="чувствует">feels</span> <span class="word" tabindex="0" data-word="uncomfortable" data-ru="неловко, некомфортно">uncomfortable</span> <span class="word" tabindex="0" data-word="when" data-ru="когда">when</span> <span class="word" tabindex="0" data-word="they" data-ru="они">they</span> <span class="word" tabindex="0" data-word="first" data-ru="сначала / первый">first</span> <span class="word" tabindex="0" data-word="meet" data-ru="встречать, знакомиться">meet</span> <span class="word" tabindex="0" data-word="other" data-ru="другой">other</span> <span class="word" tabindex="0" data-word="people" data-ru="люди">people</span>. <span class="word" tabindex="0" data-word="If" data-ru="если">If</span> <span class="word" tabindex="0" data-word="you" data-ru="ты / вы">you</span> <span class="word" tabindex="0" data-word="feel" data-ru="чувствовать">feel</span> <span class="word" tabindex="0" data-word="this" data-ru="это / этот">this</span> <span class="word" tabindex="0" data-word="way" data-ru="способ / путь">way</span>, <span class="word" tabindex="0" data-word="the" data-ru="определённый артикль">the</span> <span class="word" tabindex="0" data-word="following" data-ru="следующий">following</span> <span class="word" tabindex="0" data-word="tips" data-ru="советы">tips</span> <span class="word" tabindex="0" data-word="can" data-ru="мочь">can</span> <span class="word" tabindex="0" data-word="help" data-ru="помогать">help</span> <span class="word" tabindex="0" data-word="you" data-ru="ты / вы">you</span> <span class="word" tabindex="0" data-word="out" data-ru="наружу; help out — помочь">out</span>.</p></div><div class="tip-block">
+        <h3>Smile</h3>
+        <p><span class="word" tabindex="0" data-word="When" data-ru="когда">When</span> <span class="word" tabindex="0" data-word="you" data-ru="ты / вы">you</span> <span class="word" tabindex="0" data-word="smile" data-ru="улыбаться / улыбка">smile</span>, <span class="word" tabindex="0" data-word="people" data-ru="люди">people</span> <span class="word" tabindex="0" data-word="think" data-ru="думать">think</span> <span class="word" tabindex="0" data-word="you" data-ru="ты / вы">you</span> <span class="word" tabindex="0" data-word="are" data-ru="являются / есть">are</span> <span class="word" tabindex="0" data-word="friendly" data-ru="дружелюбный">friendly</span> <span class="word" tabindex="0" data-word="and" data-ru="и">and</span> <span class="word" tabindex="0" data-word="easy" data-ru="лёгкий">easy</span> <span class="word" tabindex="0" data-word="to" data-ru="к / чтобы / показатель инфинитива">to</span> <span class="word" tabindex="0" data-word="talk" data-ru="говорить, разговаривать">talk</span> <span class="word" tabindex="0" data-word="to" data-ru="к / чтобы / показатель инфинитива">to</span>. <span class="word" tabindex="0" data-word="They" data-ru="они">They</span> <span class="word" tabindex="0" data-word="are" data-ru="являются / есть">are</span> <span class="word" tabindex="0" data-word="also" data-ru="также">also</span> <span class="word" tabindex="0" data-word="very" data-ru="очень">very</span> <span class="word" tabindex="0" data-word="likely" data-ru="вероятно / склонный">likely</span> <span class="word" tabindex="0" data-word="to" data-ru="к / чтобы / показатель инфинитива">to</span> <span class="word" tabindex="0" data-word="smile" data-ru="улыбаться / улыбка">smile</span> <span class="word" tabindex="0" data-word="back" data-ru="назад">back</span> <span class="word" tabindex="0" data-word="and" data-ru="и">and</span> <span class="word" tabindex="0" data-word="help" data-ru="помогать">help</span> <span class="word" tabindex="0" data-word="you" data-ru="ты / вы">you</span> <span class="word" tabindex="0" data-word="feel" data-ru="чувствовать">feel</span> <span class="word" tabindex="0" data-word="more" data-ru="больше">more</span> <span class="word" tabindex="0" data-word="comfortable" data-ru="комфортно / уверенно">comfortable</span> <span class="word" tabindex="0" data-word="about" data-ru="о / насчёт">about</span> <span class="word" tabindex="0" data-word="starting" data-ru="начиная / начинающий">starting</span> <span class="word" tabindex="0" data-word="a" data-ru="неопределённый артикль / один">a</span> <span class="word" tabindex="0" data-word="conversation" data-ru="разговор, беседа">conversation</span>.</p>
+        </div><div class="tip-block">
+        <h3>Develop passions</h3>
+        <p><span class="word" tabindex="0" data-word="The" data-ru="определённый артикль">The</span> <span class="word" tabindex="0" data-word="best" data-ru="лучший">best</span> <span class="word" tabindex="0" data-word="way" data-ru="способ / путь">way</span> <span class="word" tabindex="0" data-word="to" data-ru="к / чтобы / показатель инфинитива">to</span> <span class="word" tabindex="0" data-word="have" data-ru="иметь">have</span> <span class="word" tabindex="0" data-word="interesting" data-ru="интересный">interesting</span> <span class="word" tabindex="0" data-word="conversations" data-ru="разговоры, беседы">conversations</span> <span class="word" tabindex="0" data-word="is" data-ru="есть / является">is</span> <span class="word" tabindex="0" data-word="to" data-ru="к / чтобы / показатель инфинитива">to</span> <span class="word" tabindex="0" data-word="be" data-ru="быть">be</span> <span class="word" tabindex="0" data-word="an" data-ru="неопределённый артикль">an</span> <span class="word" tabindex="0" data-word="interesting" data-ru="интересный">interesting</span> <span class="word" tabindex="0" data-word="person" data-ru="человек">person</span>! <span class="word" tabindex="0" data-word="Get" data-ru="получать; становиться; добираться">Get</span> <span class="word" tabindex="0" data-word="involved" data-ru="вовлечённый">involved</span> <span class="word" tabindex="0" data-word="in" data-ru="в">in</span> <span class="word" tabindex="0" data-word="activities" data-ru="занятия, виды деятельности">activities</span> <span class="word" tabindex="0" data-word="and" data-ru="и">and</span> <span class="word" tabindex="0" data-word="talk" data-ru="говорить, разговаривать">talk</span> <span class="word" tabindex="0" data-word="about" data-ru="о / насчёт">about</span> <span class="word" tabindex="0" data-word="them" data-ru="их / им">them</span>. <span class="word" tabindex="0" data-word="Make" data-ru="делать / создавать">Make</span> <span class="word" tabindex="0" data-word="sure" data-ru="уверенный; make sure — убедиться">sure</span> <span class="word" tabindex="0" data-word="you" data-ru="ты / вы">you</span> <span class="word" tabindex="0" data-word="have" data-ru="иметь">have</span> <span class="word" tabindex="0" data-word="something" data-ru="что-то">something</span> <span class="word" tabindex="0" data-word="to" data-ru="к / чтобы / показатель инфинитива">to</span> <span class="word" tabindex="0" data-word="add" data-ru="добавлять">add</span> <span class="word" tabindex="0" data-word="to" data-ru="к / чтобы / показатель инфинитива">to</span> <span class="word" tabindex="0" data-word="a" data-ru="неопределённый артикль / один">a</span> <span class="word" tabindex="0" data-word="conversation" data-ru="разговор, беседа">conversation</span>.</p>
+        </div><div class="tip-block">
+        <h3>Be positive</h3>
+        <p><span class="word" tabindex="0" data-word="Everybody" data-ru="все, каждый">Everybody</span> <span class="word" tabindex="0" data-word="likes" data-ru="нравится">likes</span> <span class="word" tabindex="0" data-word="to" data-ru="к / чтобы / показатель инфинитива">to</span> <span class="word" tabindex="0" data-word="be" data-ru="быть">be</span> <span class="word" tabindex="0" data-word="around" data-ru="вокруг / рядом с">around</span> <span class="word" tabindex="0" data-word="happy" data-ru="счастливый">happy</span> <span class="word" tabindex="0" data-word="people" data-ru="люди">people</span>. <span class="word" tabindex="0" data-word="Try" data-ru="пытаться">Try</span> <span class="word" tabindex="0" data-word="to" data-ru="к / чтобы / показатель инфинитива">to</span> <span class="word" tabindex="0" data-word="always" data-ru="всегда">always</span> <span class="word" tabindex="0" data-word="look" data-ru="смотреть / выглядеть">look</span> <span class="word" tabindex="0" data-word="on" data-ru="на">on</span> <span class="word" tabindex="0" data-word="the" data-ru="определённый артикль">the</span> <span class="word" tabindex="0" data-word="bright" data-ru="светлый; bright side — положительная сторона">bright</span> <span class="word" tabindex="0" data-word="side" data-ru="сторона">side</span> <span class="word" tabindex="0" data-word="of" data-ru="из / родительный падеж">of</span> <span class="word" tabindex="0" data-word="life" data-ru="жизнь">life</span> <span class="word" tabindex="0" data-word="and" data-ru="и">and</span> <span class="word" tabindex="0" data-word="to" data-ru="к / чтобы / показатель инфинитива">to</span> <span class="word" tabindex="0" data-word="see" data-ru="видеть">see</span> <span class="word" tabindex="0" data-word="something" data-ru="что-то">something</span> <span class="word" tabindex="0" data-word="positive" data-ru="положительный, позитивный">positive</span> <span class="word" tabindex="0" data-word="even" data-ru="даже">even</span> <span class="word" tabindex="0" data-word="in" data-ru="в">in</span> <span class="word" tabindex="0" data-word="negative" data-ru="отрицательный">negative</span> <span class="word" tabindex="0" data-word="situations" data-ru="ситуации">situations</span>. <span class="word" tabindex="0" data-word="People" data-ru="люди">People</span> <span class="word" tabindex="0" data-word="will" data-ru="будет / будут">will</span> <span class="word" tabindex="0" data-word="enjoy" data-ru="получать удовольствие, нравиться">enjoy</span> <span class="word" tabindex="0" data-word="your" data-ru="твой / ваш">your</span> <span class="word" tabindex="0" data-word="positive" data-ru="положительный, позитивный">positive</span> <span class="word" tabindex="0" data-word="energy" data-ru="энергия">energy</span> <span class="word" tabindex="0" data-word="and" data-ru="и">and</span> <span class="word" tabindex="0" data-word="benefit" data-ru="получать пользу">benefit</span> <span class="word" tabindex="0" data-word="from" data-ru="из / от">from</span> <span class="word" tabindex="0" data-word="it" data-ru="это / оно">it</span>. <span class="word" tabindex="0" data-word="Also" data-ru="также">Also</span>, <span class="word" tabindex="0" data-word="be" data-ru="быть">be</span> <span class="word" tabindex="0" data-word="confident" data-ru="уверенный в себе">confident</span>. <span class="word" tabindex="0" data-word="If" data-ru="если">If</span> <span class="word" tabindex="0" data-word="you" data-ru="ты / вы">you</span> <span class="word" tabindex="0" data-word="like" data-ru="нравиться / как">like</span> <span class="word" tabindex="0" data-word="yourself" data-ru="себя / сам">yourself</span>, <span class="word" tabindex="0" data-word="others" data-ru="другие">others</span> <span class="word" tabindex="0" data-word="will" data-ru="будет / будут">will</span> <span class="word" tabindex="0" data-word="probably" data-ru="вероятно">probably</span> <span class="word" tabindex="0" data-word="like" data-ru="нравиться / как">like</span> <span class="word" tabindex="0" data-word="you" data-ru="ты / вы">you</span> <span class="word" tabindex="0" data-word="too" data-ru="тоже / слишком">too</span>.</p>
+        </div><div class="tip-block">
+        <h3>Be a good listener</h3>
+        <p><span class="word" tabindex="0" data-word="Develop" data-ru="развивать">Develop</span> <span class="word" tabindex="0" data-word="listening" data-ru="слушание">listening</span> <span class="word" tabindex="0" data-word="skills" data-ru="навыки">skills</span>. <span class="word" tabindex="0" data-word="Don&#x27;t" data-ru="не / не делай">Don&#x27;t</span> <span class="word" tabindex="0" data-word="take" data-ru="брать; take over — перехватывать">take</span> <span class="word" tabindex="0" data-word="over" data-ru="над / через; take over — перехватить инициативу">over</span> <span class="word" tabindex="0" data-word="the" data-ru="определённый артикль">the</span> <span class="word" tabindex="0" data-word="conversation" data-ru="разговор, беседа">conversation</span> <span class="word" tabindex="0" data-word="and" data-ru="и">and</span> <span class="word" tabindex="0" data-word="don&#x27;t" data-ru="не / не делай">don&#x27;t</span> <span class="word" tabindex="0" data-word="only" data-ru="только">only</span> <span class="word" tabindex="0" data-word="speak" data-ru="говорить">speak</span> <span class="word" tabindex="0" data-word="about" data-ru="о / насчёт">about</span> <span class="word" tabindex="0" data-word="yourself" data-ru="себя / сам">yourself</span>. <span class="word" tabindex="0" data-word="Ask" data-ru="спрашивать">Ask</span> <span class="word" tabindex="0" data-word="other" data-ru="другой">other</span> <span class="word" tabindex="0" data-word="people" data-ru="люди">people</span> <span class="word" tabindex="0" data-word="questions" data-ru="вопросы">questions</span> <span class="word" tabindex="0" data-word="about" data-ru="о / насчёт">about</span> <span class="word" tabindex="0" data-word="themselves" data-ru="себя / сами">themselves</span> <span class="word" tabindex="0" data-word="too" data-ru="тоже / слишком">too</span>. <span class="word" tabindex="0" data-word="This" data-ru="это / этот">This</span> <span class="word" tabindex="0" data-word="way" data-ru="способ / путь">way</span> <span class="word" tabindex="0" data-word="they&#x27;ll" data-ru="они будут">they&#x27;ll</span> <span class="word" tabindex="0" data-word="know" data-ru="знать">know</span> <span class="word" tabindex="0" data-word="you&#x27;re" data-ru="ты / вы являешься">you&#x27;re</span> <span class="word" tabindex="0" data-word="interested" data-ru="заинтересованный">interested</span> <span class="word" tabindex="0" data-word="in" data-ru="в">in</span> <span class="word" tabindex="0" data-word="them" data-ru="их / им">them</span>.</p>
+        </div><div class="tip-block">
+        <h3>Get out there</h3>
+        <p><span class="word" tabindex="0" data-word="Don&#x27;t" data-ru="не / не делай">Don&#x27;t</span> <span class="word" tabindex="0" data-word="avoid" data-ru="избегать">avoid</span> <span class="word" tabindex="0" data-word="being" data-ru="нахождение / быть">being</span> <span class="word" tabindex="0" data-word="around" data-ru="вокруг / рядом с">around</span> <span class="word" tabindex="0" data-word="new" data-ru="новый">new</span> <span class="word" tabindex="0" data-word="people" data-ru="люди">people</span> <span class="word" tabindex="0" data-word="just" data-ru="просто / только что">just</span> <span class="word" tabindex="0" data-word="because" data-ru="потому что">because</span> <span class="word" tabindex="0" data-word="you" data-ru="ты / вы">you</span> <span class="word" tabindex="0" data-word="feel" data-ru="чувствовать">feel</span> <span class="word" tabindex="0" data-word="uncomfortable" data-ru="неловко, некомфортно">uncomfortable</span>. <span class="word" tabindex="0" data-word="If" data-ru="если">If</span> <span class="word" tabindex="0" data-word="you" data-ru="ты / вы">you</span> <span class="word" tabindex="0" data-word="stay" data-ru="оставаться">stay</span> <span class="word" tabindex="0" data-word="in" data-ru="в">in</span> <span class="word" tabindex="0" data-word="a" data-ru="неопределённый артикль / один">a</span> <span class="word" tabindex="0" data-word="situation" data-ru="ситуация">situation</span>, <span class="word" tabindex="0" data-word="you&#x27;ll" data-ru="ты будешь / вы будете">you&#x27;ll</span> <span class="word" tabindex="0" data-word="get" data-ru="получать; становиться; добираться">get</span> <span class="word" tabindex="0" data-word="used" data-ru="привыкший; get used to — привыкнуть">used</span> <span class="word" tabindex="0" data-word="to" data-ru="к / чтобы / показатель инфинитива">to</span> <span class="word" tabindex="0" data-word="it" data-ru="это / оно">it</span>. <span class="word" tabindex="0" data-word="It&#x27;s" data-ru="это / это есть">It&#x27;s</span> <span class="word" tabindex="0" data-word="not" data-ru="не">not</span> <span class="word" tabindex="0" data-word="easy" data-ru="лёгкий">easy</span>, <span class="word" tabindex="0" data-word="but" data-ru="но">but</span> <span class="word" tabindex="0" data-word="it&#x27;s" data-ru="это / это есть">it&#x27;s</span> <span class="word" tabindex="0" data-word="worth" data-ru="стоящий; worth it — оно того стоит">worth</span> <span class="word" tabindex="0" data-word="it" data-ru="это / оно">it</span>. <span class="word" tabindex="0" data-word="After" data-ru="после">After</span> <span class="word" tabindex="0" data-word="all" data-ru="все / всё">all</span>, <span class="word" tabindex="0" data-word="the" data-ru="определённый артикль">the</span> <span class="word" tabindex="0" data-word="other" data-ru="другой">other</span> <span class="word" tabindex="0" data-word="person" data-ru="человек">person</span> <span class="word" tabindex="0" data-word="may" data-ru="может быть / мочь">may</span> <span class="word" tabindex="0" data-word="want" data-ru="хотеть">want</span> <span class="word" tabindex="0" data-word="to" data-ru="к / чтобы / показатель инфинитива">to</span> <span class="word" tabindex="0" data-word="talk" data-ru="говорить, разговаривать">talk</span> <span class="word" tabindex="0" data-word="to" data-ru="к / чтобы / показатель инфинитива">to</span> <span class="word" tabindex="0" data-word="you" data-ru="ты / вы">you</span> <span class="word" tabindex="0" data-word="as" data-ru="как / так же как">as</span> <span class="word" tabindex="0" data-word="well" data-ru="хорошо">well</span> – <span class="word" tabindex="0" data-word="but" data-ru="но">but</span> <span class="word" tabindex="0" data-word="be" data-ru="быть">be</span> <span class="word" tabindex="0" data-word="too" data-ru="тоже / слишком">too</span> <span class="word" tabindex="0" data-word="shy" data-ru="стеснительный">shy</span> <span class="word" tabindex="0" data-word="to" data-ru="к / чтобы / показатель инфинитива">to</span> <span class="word" tabindex="0" data-word="break" data-ru="сломать; в выражении break the ice — начать общение">break</span> <span class="word" tabindex="0" data-word="the" data-ru="определённый артикль">the</span> <span class="word" tabindex="0" data-word="ice" data-ru="лёд">ice</span>!</p>
+        </div>
+</main>
+
+<section class="phrases">
+  <h2>Useful phrases from the text</h2>
+  <div style="color:#b9cbe0">These are better learned as whole expressions, because English apparently enjoys making simple words change personality when they stand next to each other.</div>
+  <div class="phrase-grid">
+    <button class="phrase" data-phrase="get to know" data-ru="познакомиться поближе">get to know</button>
+<button class="phrase" data-phrase="skate park" data-ru="скейт-парк">skate park</button>
+<button class="phrase" data-phrase="comes up" data-ru="возникает, появляется возможность">comes up</button>
+<button class="phrase" data-phrase="palms sweat" data-ru="ладони потеют">palms sweat</button>
+<button class="phrase" data-phrase="look away" data-ru="отводить взгляд">look away</button>
+<button class="phrase" data-phrase="approach a person" data-ru="подойти к человеку">approach a person</button>
+<button class="phrase" data-phrase="you fancy" data-ru="который тебе нравится">you fancy</button>
+<button class="phrase" data-phrase="break the ice" data-ru="начать непринуждённый разговор; «растопить лёд»">break the ice</button>
+<button class="phrase" data-phrase="get you down" data-ru="расстраивать тебя">get you down</button>
+<button class="phrase" data-phrase="help you out" data-ru="помочь тебе">help you out</button>
+<button class="phrase" data-phrase="smile back" data-ru="улыбнуться в ответ">smile back</button>
+<button class="phrase" data-phrase="develop passions" data-ru="развивать свои увлечения">develop passions</button>
+<button class="phrase" data-phrase="get involved in" data-ru="заниматься, вовлекаться в">get involved in</button>
+<button class="phrase" data-phrase="make sure" data-ru="убедиться">make sure</button>
+<button class="phrase" data-phrase="look on the bright side" data-ru="смотреть на вещи с положительной стороны">look on the bright side</button>
+<button class="phrase" data-phrase="benefit from" data-ru="получать пользу от">benefit from</button>
+<button class="phrase" data-phrase="take over the conversation" data-ru="перетягивать разговор на себя">take over the conversation</button>
+<button class="phrase" data-phrase="get out there" data-ru="чаще бывать среди людей и общаться">get out there</button>
+<button class="phrase" data-phrase="get used to" data-ru="привыкнуть к">get used to</button>
+<button class="phrase" data-phrase="worth it" data-ru="стоит того">worth it</button>
+<button class="phrase" data-phrase="as well" data-ru="тоже">as well</button>
+  </div>
+</section>
+</div>
+
+<div class="popup" id="popup">
+  <div class="pop-word" id="popWord"></div>
+  <div class="pop-ru" id="popRu"></div>
+  <div class="pop-actions">
+    <button class="action" id="audioBtn">🔊 Listen</button>
+    <button class="action" id="slowBtn">🐢 Slow</button>
+    <button class="action" id="closeBtn">Close</button>
+  </div>
+</div>
+
+<script>
+let currentText = "";
+const seen = new Set();
+
+function speak(text, rate=0.82) {
+  if(!("speechSynthesis" in window)) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = "en-GB";
+  u.rate = rate;
+  speechSynthesis.speak(u);
+}
+
+function openPopup(text, ru, el=null) {
+  currentText = text;
+  document.getElementById("popWord").textContent = text;
+  document.getElementById("popRu").textContent = ru;
+  document.getElementById("popup").style.display = "block";
+  speak(text);
+  if(el && el.classList.contains("word")) {
+    el.classList.add("seen");
+    seen.add(text.toLowerCase());
+    document.getElementById("stats").textContent = "Different words clicked: " + seen.size;
+  }
+}
+
+document.querySelectorAll(".word").forEach(el => {
+  el.addEventListener("click", () => openPopup(el.dataset.word, el.dataset.ru, el));
+  el.addEventListener("keydown", e => {
+    if(e.key === "Enter" || e.key === " ") {
+      e.preventDefault(); openPopup(el.dataset.word, el.dataset.ru, el);
+    }
+  });
+});
+
+document.querySelectorAll(".phrase").forEach(el => {
+  el.addEventListener("click", () => openPopup(el.dataset.phrase, el.dataset.ru));
+});
+
+document.getElementById("audioBtn").onclick = () => speak(currentText, .82);
+document.getElementById("slowBtn").onclick = () => speak(currentText, .60);
+document.getElementById("closeBtn").onclick = () => document.getElementById("popup").style.display = "none";
+document.addEventListener("keydown", e => {
+  if(e.key === "Escape") document.getElementById("popup").style.display = "none";
+});
+</script>
+</body>
+</html>
