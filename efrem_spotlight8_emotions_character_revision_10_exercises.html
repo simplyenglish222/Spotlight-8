@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ефрем • Spotlight 8 • Эмоции и характер</title>
+<style>
+:root{
+ --bg:#08111f;--panel:#10203a;--panel2:#0d1a2c;--paper:#fffdf6;--ink:#172033;
+ --text:#f8fafc;--muted:#b8c7d8;--line:#35536f;--accent:#71c7ff;
+ --good:#e6f8ec;--goodline:#2f9958;--bad:#fff0f0;--badline:#cf5151;--gold:#fff1b8
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:linear-gradient(180deg,#07101b,#0d1829 48%,#07101b);color:var(--text)}
+.wrap{max-width:1020px;margin:auto;padding:14px 12px 46px}
+header,.section{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px;margin:15px 0}
+header{background:linear-gradient(135deg,#193b69,#10243f)}
+.kicker{color:#bfe4ff;font-weight:800}
+h1{font-size:clamp(28px,6vw,44px);margin:4px 0 7px}
+h2{margin:0 0 8px}
+.bigtitle{font-size:clamp(32px,7vw,54px);font-weight:1000;text-align:center;margin:16px 0}
+.note{color:var(--muted)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.tab{appearance:none;border:1px solid #55779a;background:#18304e;color:white;border-radius:999px;padding:8px 12px;font-weight:800;cursor:pointer}
+.vocab{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.card{background:var(--panel2);border:1px solid #395877;border-radius:14px;padding:12px}
+.card h3{margin:0 0 8px;color:#bfe4ff}
+.row{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid #263d58}
+.row:last-child{border-bottom:none}
+.ruw{color:#ffe39b;font-weight:800}.enw{font-weight:900;color:#e4f4ff}
+.audio,.ctrl,.word,.opt,.drop{appearance:none;cursor:pointer;font-weight:800}
+.audio,.ctrl{border:1px solid #55779a;background:#18304e;color:#fff;border-radius:10px;padding:8px 10px;min-height:42px}
+.exercise{background:var(--paper);color:var(--ink);border-radius:18px;padding:15px;border:1px solid #ddd5b8;margin:15px 0}
+.inst{font-weight:800;color:#40546b}
+.q{padding:10px 0;border-bottom:1px solid #e8e0ca}.q:last-child{border-bottom:none}
+.qtext{font-weight:800;margin-bottom:7px}
+.opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.opt{border:1px solid #9bb0c4;background:#f8fbfd;color:#20344b;border-radius:10px;padding:9px;min-height:44px}
+.opt.sel{border-color:#2d72a8;background:#e9f4fb}
+.opt.correct{border-color:var(--goodline);background:var(--good);color:#155e33}
+.opt.wrong{border-color:var(--badline);background:var(--bad);color:#8c2424}
+.wordbank{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.word{border:1px solid #55779a;background:#18304e;color:#fff;border-radius:999px;padding:9px 12px;min-height:42px}
+.word.sel{outline:3px solid var(--accent)}.word.used{opacity:.35}
+.drop{display:inline-flex;align-items:center;justify-content:center;min-width:130px;min-height:40px;border:2px dashed #8aa2b7;border-radius:10px;background:#f7fafc;color:#20344b;padding:5px 8px}
+.drop.empty:after{content:"нажми сюда";font-size:.76rem;color:#7890a8}
+.drop.correct{border-color:var(--goodline);background:var(--good);color:#155e33}
+.drop.wrong{border-color:var(--badline);background:var(--bad);color:#8c2424}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.ctrl.primary{background:#23679e;border-color:#3798dc}
+.fb{font-weight:900;margin-top:10px;min-height:24px}.ok{color:#197a40}.no{color:#a52d2d}
+.progress{height:12px;background:#0b1626;border:1px solid #2b435f;border-radius:999px;overflow:hidden;margin-top:12px}
+.bar{height:100%;width:0;background:#71c7ff}
+.sample{display:none;margin-top:8px;padding:9px;background:var(--gold);color:#594811;border-radius:10px}
+.badge{display:inline-block;padding:3px 8px;border-radius:999px;font-size:.75rem;background:#18304e;color:#cfeaff;margin-left:6px}
+@media(max-width:760px){.vocab{grid-template-columns:1fr}}
+@media(max-width:560px){
+ .wrap{padding:9px 8px 36px}.opts{grid-template-columns:1fr}.row{font-size:.93rem}.opt,.word,.ctrl{min-height:46px}
+ header,.section,.exercise{border-radius:15px}
+}
+</style>
+</head>
+<body>
+<div class="wrap" id="app">
+<header>
+<div class="kicker">Spotlight 8 • Ефрем</div>
+<h1>Эмоции, характер и язык тела</h1>
+<p>Повторяем больше слов, но задания остаются простыми.</p>
+<div class="progress"><div class="bar" id="bar"></div></div>
+<div id="progress">Прогресс: 0 / 10 упражнений</div>
+</header>
+
+<div class="bigtitle">слова, которые нужно выучить</div>
+
+<section class="section">
+<h2>Эмоции</h2>
+<p class="note">Сначала русский, потом английский. Нажми 🔊 и повтори.</p>
+<div class="card">
+<div class="row"><div class="ruw">нервный</div><div class="enw">nervous</div><button class="audio" data-say="nervous">🔊</button></div>
+<div class="row"><div class="ruw">в ярости</div><div class="enw">furious</div><button class="audio" data-say="furious">🔊</button></div>
+<div class="row"><div class="ruw">удивлённый</div><div class="enw">surprised</div><button class="audio" data-say="surprised">🔊</button></div>
+<div class="row"><div class="ruw">нетерпеливый</div><div class="enw">impatient</div><button class="audio" data-say="impatient">🔊</button></div>
+<div class="row"><div class="ruw">неуверенный</div><div class="enw">unsure</div><button class="audio" data-say="unsure">🔊</button></div>
+<div class="row"><div class="ruw">скучающий</div><div class="enw">bored</div><button class="audio" data-say="bored">🔊</button></div>
+<div class="row"><div class="ruw">обеспокоенный</div><div class="enw">worried</div><button class="audio" data-say="worried">🔊</button></div>
+<div class="row"><div class="ruw">озадаченный</div><div class="enw">puzzled</div><button class="audio" data-say="puzzled">🔊</button></div>
+</div>
+</section>
+
+<section class="section">
+<h2>Характер</h2>
+<div class="card">
+<div class="row"><div class="ruw">оптимистичный</div><div class="enw">optimistic</div><button class="audio" data-say="optimistic">🔊</button></div>
+<div class="row"><div class="ruw">чувствительный</div><div class="enw">sensitive</div><button class="audio" data-say="sensitive">🔊</button></div>
+<div class="row"><div class="ruw">заботливый</div><div class="enw">caring</div><button class="audio" data-say="caring">🔊</button></div>
+<div class="row"><div class="ruw">спокойный</div><div class="enw">calm</div><button class="audio" data-say="calm">🔊</button></div>
+<div class="row"><div class="ruw">терпеливый</div><div class="enw">patient</div><button class="audio" data-say="patient">🔊</button></div>
+<div class="row"><div class="ruw">лёгкий в общении</div><div class="enw">easy-going</div><button class="audio" data-say="easy-going">🔊</button></div>
+<div class="row"><div class="ruw">общительный</div><div class="enw">sociable</div><button class="audio" data-say="sociable">🔊</button></div>
+<div class="row"><div class="ruw">честный</div><div class="enw">honest</div><button class="audio" data-say="honest">🔊</button></div>
+<div class="row"><div class="ruw">надёжный</div><div class="enw">reliable</div><button class="audio" data-say="reliable">🔊</button></div>
+<div class="row"><div class="ruw">упрямый</div><div class="enw">stubborn</div><button class="audio" data-say="stubborn">🔊</button></div>
+<div class="row"><div class="ruw">эгоистичный</div><div class="enw">selfish</div><button class="audio" data-say="selfish">🔊</button></div>
+<div class="row"><div class="ruw">стеснительный</div><div class="enw">shy</div><button class="audio" data-say="shy">🔊</button></div>
+<div class="row"><div class="ruw">уверенный в себе</div><div class="enw">confident</div><button class="audio" data-say="confident">🔊</button></div>
+</div>
+</section>
+
+<section class="section">
+<h2>Язык тела</h2>
+<div class="card">
+<div class="row"><div class="ruw">чесать голову</div><div class="enw">scratch your head</div><button class="audio" data-say="scratch your head">🔊</button></div>
+<div class="row"><div class="ruw">постукивать ногой</div><div class="enw">tap your foot</div><button class="audio" data-say="tap your foot">🔊</button></div>
+<div class="row"><div class="ruw">кусать губу</div><div class="enw">bite your lip</div><button class="audio" data-say="bite your lip">🔊</button></div>
+<div class="row"><div class="ruw">скрестить руки</div><div class="enw">cross your arms</div><button class="audio" data-say="cross your arms">🔊</button></div>
+<div class="row"><div class="ruw">сжать зубы</div><div class="enw">clench your teeth</div><button class="audio" data-say="clench your teeth">🔊</button></div>
+<div class="row"><div class="ruw">поднять брови</div><div class="enw">raise your eyebrows</div><button class="audio" data-say="raise your eyebrows">🔊</button></div>
+<div class="row"><div class="ruw">пожать плечами</div><div class="enw">shrug your shoulders</div><button class="audio" data-say="shrug your shoulders">🔊</button></div>
+<div class="row"><div class="ruw">ладони потеют</div><div class="enw">have sweaty palms</div><button class="audio" data-say="have sweaty palms">🔊</button></div>
+</div>
+</section>
+
+<section class="exercise" data-ex="1"><h2>Упражнение 1</h2><p class="inst">Выбери английское слово.</p><div id="ex1"></div><div class="actions"><button class="ctrl primary check">Проверить</button></div><div class="fb"></div></section>
+<section class="exercise" data-ex="2"><h2>Упражнение 2</h2><p class="inst">Выбери русский перевод.</p><div id="ex2"></div><div class="actions"><button class="ctrl primary check">Проверить</button></div><div class="fb"></div></section>
+<section class="exercise" data-ex="3"><h2>Упражнение 3</h2><p class="inst">Выбери подходящее чувство.</p><div id="ex3"></div><div class="actions"><button class="ctrl primary check">Проверить</button></div><div class="fb"></div></section>
+<section class="exercise" data-ex="4"><h2>Упражнение 4</h2><p class="inst">Выбери слово о характере.</p><div id="ex4"></div><div class="actions"><button class="ctrl primary check">Проверить</button></div><div class="fb"></div></section>
+<section class="exercise" data-ex="5"><h2>Упражнение 5</h2><p class="inst">Положительное или отрицательное качество?</p><div id="ex5"></div><div class="actions"><button class="ctrl primary check">Проверить</button></div><div class="fb"></div></section>
+<section class="exercise" data-ex="6"><h2>Упражнение 6</h2><p class="inst">Выбери эмоцию по языку тела.</p><div id="ex6"></div><div class="actions"><button class="ctrl primary check">Проверить</button></div><div class="fb"></div></section>
+<section class="exercise" data-ex="7"><h2>Упражнение 7</h2><p class="inst">Выбери английскую фразу.</p><div id="ex7"></div><div class="actions"><button class="ctrl primary check">Проверить</button></div><div class="fb"></div></section>
+<section class="exercise" data-ex="8"><h2>Упражнение 8</h2><p class="inst">Вставь слово в предложение.</p><div class="wordbank" id="bank8"></div><div id="ex8"></div><div class="actions"><button class="ctrl primary check">Проверить</button></div><div class="fb"></div></section>
+<section class="exercise" data-ex="9"><h2>Упражнение 9</h2><p class="inst">Выбери правильную фразу по-русски.</p><div id="ex9"></div><div class="actions"><button class="ctrl primary check">Проверить</button></div><div class="fb"></div></section>
+<section class="exercise" data-ex="10"><h2>Упражнение 10</h2><p class="inst">Финальное повторение. Выбери правильный вариант.</p><div id="ex10"></div><div class="actions"><button class="ctrl primary check">Проверить</button><button class="ctrl" id="reset">Начать заново</button></div><div class="fb"></div></section>
+
+<section class="section">
+<h2>Скажи вслух</h2>
+<p class="note">Три очень короткие фразы. Этого достаточно.</p>
+<p><b>I feel nervous when ...</b></p>
+<p><b>My friend is ...</b></p>
+<p><b>When I am worried, I ...</b></p>
+<button class="ctrl" id="sampleBtn">Показать пример</button>
+<div class="sample" id="sample">I feel nervous before a test.<br>My friend is sociable and reliable.<br>When I am worried, I bite my lip.</div>
+</section>
+</div>
+
+<script>
+(()=>{
+const root=document.getElementById('app'),done=new Set();
+function speak(t){if(!('speechSynthesis'in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='en-GB';u.rate=.82;speechSynthesis.speak(u)}
+root.querySelectorAll('[data-say]').forEach(b=>b.onclick=()=>speak(b.dataset.say));
+
+const sets={
+ ex1:[['нервный','nervous',['nervous','bored']],['упрямый','stubborn',['reliable','stubborn']],['общительный','sociable',['sociable','shy']],['честный','honest',['honest','selfish']],['удивлённый','surprised',['worried','surprised']]],
+ ex2:[['furious','в ярости',['в ярости','спокойный']],['reliable','надёжный',['упрямый','надёжный']],['puzzled','озадаченный',['озадаченный','общительный']],['confident','уверенный в себе',['стеснительный','уверенный в себе']],['caring','заботливый',['заботливый','эгоистичный']]],
+ ex3:[['У тебя завтра важный тест.','worried',['worried','surprised']],['Ты ждёшь друга уже 30 минут.','impatient',['impatient','bored']],['Ты не понимаешь вопрос.','puzzled',['puzzled','furious']],['Тебе неожиданно подарили подарок.','surprised',['unsure','surprised']],['Ты выходишь отвечать перед классом.','nervous',['nervous','bored']]],
+ ex4:[['Он любит знакомиться и разговаривать с людьми.','sociable',['sociable','shy']],['Ей можно доверять.','reliable',['reliable','selfish']],['Он всегда говорит правду.','honest',['honest','stubborn']],['Она думает о чувствах других людей.','caring',['caring','selfish']],['Он не боится говорить с новыми людьми.','confident',['confident','shy']]],
+ ex5:[['optimistic','positive',['positive','negative']],['reliable','positive',['positive','negative']],['selfish','negative',['positive','negative']],['stubborn','negative',['positive','negative']],['caring','positive',['positive','negative']],['honest','positive',['positive','negative']]],
+ ex6:[['scratch your head','puzzled',['puzzled','furious']],['tap your foot','impatient',['bored','impatient']],['bite your lip','worried',['worried','surprised']],['clench your teeth','furious',['furious','unsure']],['raise your eyebrows','surprised',['surprised','nervous']],['have sweaty palms','nervous',['bored','nervous']]],
+ ex7:[['чесать голову','scratch your head',['scratch your head','cross your arms']],['пожать плечами','shrug your shoulders',['shrug your shoulders','tap your foot']],['поднять брови','raise your eyebrows',['bite your lip','raise your eyebrows']],['скрестить руки','cross your arms',['cross your arms','clench your teeth']],['кусать губу','bite your lip',['bite your lip','have sweaty palms']]],
+ ex9:[['easy-going','лёгкий в общении',['лёгкий в общении','нетерпеливый']],['sensitive','чувствительный',['чувствительный','уверенный']],['calm','спокойный',['скучающий','спокойный']],['patient','терпеливый',['терпеливый','эгоистичный']],['shy','стеснительный',['стеснительный','надёжный']]],
+ ex10:[['I am very ____ before an exam.','nervous',['nervous','honest']],['My best friend is very ____. I can trust him.','reliable',['reliable','furious']],['She likes meeting people. She is ____.','sociable',['sociable','worried']],['He always wants to do things his own way. He is ____.','stubborn',['stubborn','caring']],['I don’t understand. I am ____.','puzzled',['puzzled','optimistic']],['She thinks good things will happen. She is ____.','optimistic',['optimistic','selfish']]]
+};
+
+function mc(id,data){
+ const box=root.querySelector(id);
+ data.forEach((x,i)=>{
+  const q=document.createElement('div');q.className='q';q.dataset.answer=x[1];
+  const t=document.createElement('div');t.className='qtext';t.textContent=(i+1)+'. '+x[0];
+  const o=document.createElement('div');o.className='opts';
+  x[2].forEach(v=>{const b=document.createElement('button');b.className='opt';b.type='button';b.textContent=v;b.onclick=()=>{[...o.children].forEach(z=>z.classList.remove('sel','correct','wrong'));b.classList.add('sel')};o.append(b)});
+  q.append(t,o);box.append(q)
+ })
+}
+['ex1','ex2','ex3','ex4','ex5','ex6','ex7','ex9','ex10'].forEach(k=>mc('#'+k,sets[k]));
+
+const fillWords=['nervous','sociable','reliable','shy','confident','worried'];
+const fillQs=[
+ ['Before a test I feel ','nervous'],
+ ['My friend likes talking to people. He is ','sociable'],
+ ['You can trust Anna. She is ','reliable'],
+ ['He does not like talking to new people. He is ','shy'],
+ ['She is not afraid to speak in class. She is ','confident'],
+ ['I think about the problem all evening. I am ','worried']
+];
+let selected=null;
+const bank=root.querySelector('#bank8'),box8=root.querySelector('#ex8');
+fillWords.forEach(w=>{const b=document.createElement('button');b.className='word';b.type='button';b.textContent=w;b.dataset.word=w;b.onclick=()=>{if(b.classList.contains('used'))return;root.querySelectorAll('#bank8 .word').forEach(x=>x.classList.remove('sel'));selected=w;b.classList.add('sel');speak(w)};bank.append(b)});
+fillQs.forEach((x,i)=>{const q=document.createElement('div');q.className='q';const t=document.createElement('div');t.className='qtext';t.textContent=(i+1)+'. '+x[0];const d=document.createElement('button');d.className='drop empty';d.type='button';d.dataset.answer=x[1];d.onclick=()=>{if(selected){if(d.dataset.value){const old=[...root.querySelectorAll('#bank8 .word')].find(z=>z.dataset.word===d.dataset.value);if(old){old.classList.remove('used');old.disabled=false}}d.dataset.value=selected;d.textContent=selected;d.classList.remove('empty','correct','wrong');const src=[...root.querySelectorAll('#bank8 .word')].find(z=>z.dataset.word===selected);src.classList.add('used');src.classList.remove('sel');src.disabled=true;selected=null}else if(d.dataset.value){const src=[...root.querySelectorAll('#bank8 .word')].find(z=>z.dataset.word===d.dataset.value);if(src){src.classList.remove('used');src.disabled=false}delete d.dataset.value;d.textContent='';d.classList.add('empty')}};q.append(t,d);box8.append(q)});
+
+function check(sec){
+ let total=0,ok=0;
+ if(sec.dataset.ex==='8'){
+  const ds=[...sec.querySelectorAll('.drop')];total=ds.length;
+  ds.forEach(d=>{d.classList.remove('correct','wrong');if(d.dataset.value===d.dataset.answer){d.classList.add('correct');ok++}else d.classList.add('wrong')})
+ }else{
+  const qs=[...sec.querySelectorAll('.q')];total=qs.length;
+  qs.forEach(q=>{const s=q.querySelector('.opt.sel');q.querySelectorAll('.opt').forEach(x=>x.classList.remove('correct','wrong'));if(s){if(s.textContent.trim()===q.dataset.answer){s.classList.add('correct');ok++}else s.classList.add('wrong')}})
+ }
+ const fb=sec.querySelector('.fb');
+ if(ok===total){fb.textContent='✓ Всё правильно!';fb.className='fb ok';done.add(sec.dataset.ex)}
+ else{fb.textContent='Правильно: '+ok+' из '+total+'. Исправь красные ответы.';fb.className='fb no';done.delete(sec.dataset.ex)}
+ update()
+}
+root.querySelectorAll('.check').forEach(b=>b.onclick=()=>check(b.closest('.exercise')));
+function update(){root.querySelector('#bar').style.width=(done.size/10*100)+'%';root.querySelector('#progress').textContent='Прогресс: '+done.size+' / 10 упражнений'}
+root.querySelector('#sampleBtn').onclick=()=>{const s=root.querySelector('#sample');s.style.display=s.style.display==='block'?'none':'block'};
+root.querySelector('#reset').onclick=()=>location.reload();
+update();
+})();
+</script>
+</body>
+</html>
