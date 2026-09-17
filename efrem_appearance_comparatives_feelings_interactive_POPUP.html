@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Efrem • Appearance, Comparatives & Feelings</title>
+<style>
+:root{--bg:#08111f;--panel:#10203a;--paper:#fffdf7;--ink:#172033;--text:#f8fafc;--muted:#b9c7d8;--line:#35536f;--accent:#69ccff;--good:#e6f8ec;--goodline:#2f9958;--bad:#fff0f0;--badline:#cf5151;--gold:#fff1b8;--teal:#0aa4ad}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:linear-gradient(180deg,#07101b,#0e192b 45%,#07101b);color:var(--text)}
+.wrap{max-width:1100px;margin:auto;padding:14px 12px 52px}header,.block{background:var(--panel);border:1px solid var(--line);border-radius:19px;padding:15px;margin:16px 0}header{background:linear-gradient(135deg,#193b69,#10243f)}
+.kicker{color:#bfe4ff;font-weight:850}h1{font-size:clamp(28px,6vw,46px);margin:4px 0 8px}h2{margin:0 0 9px;font-size:clamp(22px,4vw,31px)}h3{margin:0 0 8px}.note{color:var(--muted)}
+.progress{height:12px;background:#07111f;border:1px solid #29435f;border-radius:999px;overflow:hidden;margin-top:12px}.bar{height:100%;width:0;background:var(--accent)}.progressText{margin-top:6px;font-weight:900;color:#cfeeff}
+.nav{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.nav a{color:#e8f6ff;text-decoration:none;border:1px solid #4a6d90;background:#17304f;padding:8px 11px;border-radius:999px;font-weight:800}
+.paper{background:var(--paper);color:var(--ink);border-radius:17px;padding:14px;border:1px solid #ddd5b8}.exercise{margin:16px 0}.bigtitle{font-size:clamp(30px,6vw,50px);font-weight:1000;text-align:center;margin:18px 0 12px}
+.vocabGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.vocabCard{background:#0d1a2c;border:1px solid #395877;border-radius:14px;padding:11px}.vocabCard h3{color:#bfe4ff}
+.wordCloud{display:flex;gap:6px;flex-wrap:wrap}.clickWord,.btn,.token,.drop,.choice,.piece,.answerChip{font:inherit;font-weight:800;cursor:pointer}
+.clickWord{appearance:none;border:1px solid #466786;background:#17304f;color:#fff;border-radius:999px;padding:6px 9px}.translationPop{
+  display:none;
+  position:fixed;
+  z-index:9999;
+  max-width:min(300px,calc(100vw - 20px));
+  padding:10px 12px;
+  border-radius:12px;
+  background:#fff1b8;
+  color:#5a4814;
+  font-weight:800;
+  border:1px solid #dfc96d;
+  box-shadow:0 8px 24px rgba(0,0,0,.28);
+  pointer-events:none;
+}
+.translationPop::after{
+  content:"";
+  position:absolute;
+  width:12px;
+  height:12px;
+  background:#fff1b8;
+  border-left:1px solid #dfc96d;
+  border-top:1px solid #dfc96d;
+  transform:rotate(45deg);
+  top:-7px;
+  left:22px;
+}
+.btn{appearance:none;border:1px solid #55779a;background:#18304e;color:#fff;border-radius:11px;padding:9px 12px;min-height:42px}.btn.primary{background:#23679e;border-color:#3798dc}.btn.light{background:#f7fbff;color:#24425e;border-color:#a7bfd3}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.feedback{min-height:24px;margin-top:10px;font-weight:900}.feedback.ok{color:#197a40}.feedback.no{color:#a52d2d}
+.wordBank{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}.token{appearance:none;border:1px solid #67829c;background:#18304e;color:#fff;border-radius:999px;padding:9px 12px;min-height:42px}.token.sel{outline:3px solid var(--accent);outline-offset:2px}.token.used{opacity:.32}
+.categories{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.catBox{border:1px solid var(--teal);border-radius:12px;overflow:hidden;background:#fff}.catBox h4{margin:0;padding:9px 11px;background:var(--teal);color:#fff}.dropZone{min-height:92px;padding:7px}
+.drop{width:100%;min-height:42px;border:2px dashed #9cb0c2;background:#f8fbfd;color:#20344b;border-radius:9px;margin:5px 0;padding:7px}.drop.empty:after{content:"нажми сюда";color:#7a8fa4;font-size:.78rem}.drop.correct{border-color:var(--goodline);background:var(--good);color:#155e33}.drop.wrong{border-color:var(--badline);background:var(--bad);color:#8c2424}
+.qItem{padding:10px 0;border-bottom:1px solid #ece4d2}.qItem:last-child{border-bottom:none}.prompt{font-weight:850;margin-bottom:8px}.options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.choice{appearance:none;border:1px solid #9db1c3;background:#f8fbfd;color:#20344b;border-radius:10px;padding:9px;min-height:44px}.choice.sel{border-color:#2d72a8;background:#e9f4fb}.choice.correct{border-color:var(--goodline);background:var(--good);color:#155e33}.choice.wrong{border-color:var(--badline);background:var(--bad);color:#8c2424}
+.ruleGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.ruleCard{background:#f7fbff;border:1px solid #bfd3e5;border-radius:12px;padding:11px}.ruleCard strong{color:#234b77}.exampleList{display:grid;gap:8px;margin-top:10px}.example{background:#fff6d8;border:1px solid #ead79b;border-radius:11px;padding:10px}.ruLine{color:#685719;margin-top:4px}
+.builder{margin:12px 0;padding:11px;border:1px solid #dce4eb;border-radius:12px;background:#fbfdff}.builder .words{display:flex;gap:7px;flex-wrap:wrap;margin:8px 0}.piece{appearance:none;border:1px solid #758da4;background:#fff;color:#20344b;border-radius:9px;padding:8px 10px}.piece.used{opacity:.3}.answerLine{min-height:48px;border:2px dashed #9cb0c2;border-radius:10px;padding:8px;display:flex;gap:6px;flex-wrap:wrap;align-items:center;background:#fff}.answerChip{border:1px solid #7d94a9;background:#eef6fb;border-radius:8px;padding:6px 8px}.answerLine.correct{border-color:var(--goodline);background:var(--good)}.answerLine.wrong{border-color:var(--badline);background:var(--bad)}
+.emotionLegend{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0}
+.translationPop.above::after{
+  top:auto;
+  bottom:-7px;
+  transform:rotate(225deg);
+}
+@media(max-width:820px){.vocabGrid,.ruleGrid{grid-template-columns:1fr}}@media(max-width:650px){.categories,.options{grid-template-columns:1fr}.wrap{padding:9px 8px 36px}.choice,.token,.btn,.clickWord{min-height:46px}}
+</style>
+</head>
+<body>
+<div class="wrap" id="app">
+<header>
+<div class="kicker">Spotlight • Ефрем</div>
+<h1>Appearance + Comparatives + Feelings</h1>
+<p class="note">Все инструкции на русском. Английские слова кликабельны: по нажатию показывается перевод и включается произношение.</p>
+<div class="progress"><div class="bar" id="bar"></div></div><div class="progressText" id="progressText">Прогресс: 0 / 6 упражнений</div>
+<div class="nav"><a href="#block1">1. Внешность и характер</a><a href="#block2">2. Сравнительная степень</a><a href="#block3">3. Чувства</a></div>
+</header>
+
+<div class="bigtitle">Блок 1. Внешность, характер и интересы</div>
+<section class="block" id="block1"><h2>Слова, которые нужно знать</h2><p class="note">Нажми на любое английское слово: увидишь перевод и услышишь произношение.</p><div class="vocabGrid" id="vocabGrid"></div><div class="translationPop" id="translationPop"></div></section>
+
+<section class="paper exercise" data-ex="1"><h2>Упражнение 1. Разложи слова по группам</h2><p>Нажми слово, затем нажми на нужную группу. На компьютере можно и перетаскивать.</p><div class="wordBank" id="catBank"></div><div class="categories" id="categories"></div><div class="actions"><button class="btn primary check">Проверить</button><button class="btn light resetCat">Сбросить</button></div><div class="feedback"></div></section>
+
+<section class="paper exercise" data-ex="2"><h2>Упражнение 2. Перевод</h2><p>Выбери правильный английский вариант.</p><div id="translationExercise"></div><div class="actions"><button class="btn primary check">Проверить</button></div><div class="feedback"></div></section>
+
+<div class="bigtitle">Блок 2. Comparatives & Superlatives</div>
+<section class="block" id="block2"><h2>Очень простое объяснение</h2><div class="paper">
+<div class="ruleGrid">
+<div class="ruleCard"><strong>1. Короткое слово</strong><p>Обычно добавляем <b>-er</b> и <b>the -est</b>.</p><p>clean → cleaner → the cleanest</p><p>hard → harder → the hardest</p></div>
+<div class="ruleCard"><strong>2. Длинное слово</strong><p>Используем <b>more</b> и <b>the most</b>.</p><p>exciting → more exciting → the most exciting</p><p>clearly → more clearly → the most clearly</p></div>
+<div class="ruleCard"><strong>3. Неправильные формы</strong><p>Их нужно запомнить.</p><p>good → better → the best</p><p>bad → worse → the worst</p><p>far → further → the furthest</p></div>
+</div>
+<div class="exampleList">
+<div class="example"><b>Tom is taller than Ben.</b><div class="ruLine">Том выше Бена.</div></div>
+<div class="example"><b>This film is more exciting than that film.</b><div class="ruLine">Этот фильм интереснее того фильма.</div></div>
+<div class="example"><b>Anna is the funniest person in our class.</b><div class="ruLine">Анна — самый смешной человек в нашем классе.</div></div>
+<div class="example"><b>This is the best day of the week.</b><div class="ruLine">Это лучший день недели.</div></div>
+</div></div></section>
+
+<section class="paper exercise" data-ex="3"><h2>Упражнение 3. Выбери правильную форму</h2><p>Простые примеры на comparative / superlative.</p><div id="comparativeMcq"></div><div class="actions"><button class="btn primary check">Проверить</button></div><div class="feedback"></div></section>
+
+<section class="paper exercise" data-ex="4"><h2>Упражнение 4. Собери предложения</h2><p>Нажимай слова по порядку. Нажатие на слово в готовой строке возвращает его назад.</p><div id="builders"></div><div class="actions"><button class="btn primary check">Проверить</button></div><div class="feedback"></div></section>
+
+<div class="bigtitle">Блок 3. Чувства и эмоции</div>
+<section class="block" id="block3"><h2>Повторяем знакомые слова</h2><p class="note">Нажми на слово, чтобы услышать его.</p><div class="emotionLegend" id="emotionLegend"></div></section>
+<section class="paper exercise" data-ex="5"><h2>Упражнение 5. Подставь слово: 1–8</h2><p>В каждом предложении выбери один вариант из четырёх.</p><div id="emotion1"></div><div class="actions"><button class="btn primary check">Проверить</button></div><div class="feedback"></div></section>
+<section class="paper exercise" data-ex="6"><h2>Упражнение 6. Подставь слово: 9–15</h2><p>Ещё семь предложений. Всего 15 предложений на чувства.</p><div id="emotion2"></div><div class="actions"><button class="btn primary check">Проверить</button></div><div class="feedback"></div></section>
+</div>
+
+<script>
+(()=>{
+const root=document.getElementById('app'),completed=new Set();
+function speak(text){if(!('speechSynthesis'in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='en-GB';u.rate=.82;speechSynthesis.speak(u)}
+function update(){root.querySelector('#bar').style.width=(completed.size/6*100)+'%';root.querySelector('#progressText').textContent='Прогресс: '+completed.size+' / 6 упражнений'}
+
+const vocab={
+Age:[['young','молодой'],['in his/her early twenties','ему / ей немного за 20'],['in his/her late twenties','ему / ей ближе к 30'],['thirties','за 30'],['older than he/she looks','старше, чем выглядит'],['middle-aged','среднего возраста']],
+Looks:[['good-looking','привлекательный'],['pretty','симпатичная'],['beautiful','красивая'],['handsome','красивый (о мужчине)'],['rather ugly','довольно некрасивый']],
+Height:[['short','низкого роста'],['quite tall','довольно высокий'],['of average height','среднего роста']],
+Weight:[['a bit thin','немного худой'],['rather plump','довольно пухлый'],['overweight','с избыточным весом'],['skinny','очень худой'],['thin','худой'],['slim','стройный'],['strong','сильный'],['muscular','мускулистый'],['of medium build','среднего телосложения']],
+Hair:[['fair','светлые волосы'],['blonde','блондин / светлые волосы'],['dark','тёмные волосы'],['ginger','рыжие волосы'],['going grey','начинающий седеть'],['almost bald','почти лысый'],['white','белые / седые волосы'],['curly','кудрявые'],['wavy','волнистые'],['straight','прямые'],['shoulder-length','до плеч'],['long','длинные']],
+Eyes:[['almond-shaped','миндалевидные'],['dark','тёмные'],['small','маленькие'],['green','зелёные'],['blue','голубые / синие']],
+Personality:[['funny','смешной'],['hard-working','трудолюбивый'],['talkative','разговорчивый'],['friendly','дружелюбный'],['a bit dull','немного скучный'],['boring','скучный'],['energetic','энергичный'],['sporty','спортивный'],['moody','с переменчивым настроением'],['creative','творческий'],['shy','стеснительный'],['bossy','любящий командовать'],['sensible','разумный'],['impatient','нетерпеливый'],['humorous','с чувством юмора'],['stubborn','упрямый'],['selfish','эгоистичный'],['generous','щедрый']],
+Interests:[['photography','фотография'],['drawing','рисование'],['sports','спорт'],['making model cars','создание моделей машин'],['painting','рисование красками'],['reading','чтение'],['travelling','путешествия'],['cinema','кино'],['theatre','театр'],['music','музыка']]
+};
+const vg=root.querySelector('#vocabGrid');
+Object.entries(vocab).forEach(([cat,items])=>{const c=document.createElement('div');c.className='vocabCard';c.innerHTML='<h3>'+cat+'</h3><div class="wordCloud"></div>';items.forEach(([en,ru])=>{const b=document.createElement('button');b.className='clickWord';b.textContent=en;b.onclick=(ev)=>{
+  ev.stopPropagation();
+  const p=root.querySelector('#translationPop');
+  p.textContent=en+' — '+ru;
+  p.style.display='block';
+
+  const r=b.getBoundingClientRect();
+  const margin=8;
+  let left=r.left;
+  let top=r.bottom+margin;
+
+  p.style.left='0px';
+  p.style.top='0px';
+  const pw=p.offsetWidth;
+  const ph=p.offsetHeight;
+
+  if(left+pw>window.innerWidth-10) left=window.innerWidth-pw-10;
+  if(left<10) left=10;
+
+  if(top+ph>window.innerHeight-10){
+    top=r.top-ph-margin;
+    p.classList.add('above');
+  } else {
+    p.classList.remove('above');
+  }
+
+  p.style.left=Math.round(left)+'px';
+  p.style.top=Math.round(top)+'px';
+  speak(en);
+};c.querySelector('.wordCloud').append(b)});vg.append(c)});
+
+const catWords=[['middle-aged','Age'],['handsome','Looks'],['quite tall','Height'],['slim','Weight'],['curly','Hair'],['green','Eyes'],['friendly','Personality'],['reading','Interests'],['young','Age'],['beautiful','Looks'],['short','Height'],['muscular','Weight'],['wavy','Hair'],['blue','Eyes'],['stubborn','Personality'],['photography','Interests']];
+let selected=null,dragged=null;const bank=root.querySelector('#catBank');
+catWords.forEach(([w,cat])=>{const b=document.createElement('button');b.className='token';b.textContent=w;b.dataset.w=w;b.dataset.cat=cat;b.draggable=true;b.onclick=()=>{if(b.classList.contains('used'))return;root.querySelectorAll('#catBank .token').forEach(x=>x.classList.remove('sel'));selected=w;b.classList.add('sel');speak(w)};b.ondragstart=e=>{if(b.classList.contains('used')){e.preventDefault();return}dragged=w;e.dataTransfer.setData('text/plain',w)};b.ondragend=()=>dragged=null;bank.append(b)});
+const cats=root.querySelector('#categories');
+Object.keys(vocab).forEach(cat=>{const box=document.createElement('div');box.className='catBox';box.innerHTML='<h4>'+cat+'</h4><div class="dropZone"></div>';for(let i=0;i<2;i++){const d=document.createElement('button');d.className='drop empty';d.dataset.cat=cat;d.onclick=()=>place(d,selected);d.ondragover=e=>e.preventDefault();d.ondrop=e=>{e.preventDefault();place(d,e.dataTransfer.getData('text/plain')||dragged)};box.querySelector('.dropZone').append(d)}cats.append(box)});
+function place(d,w){if(!w){if(d.dataset.v){const old=[...root.querySelectorAll('#catBank .token')].find(x=>x.dataset.w===d.dataset.v);if(old){old.classList.remove('used');old.disabled=false}delete d.dataset.v;d.textContent='';d.className='drop empty'}return}const src=[...root.querySelectorAll('#catBank .token')].find(x=>x.dataset.w===w);if(!src||src.classList.contains('used'))return;if(d.dataset.v){const old=[...root.querySelectorAll('#catBank .token')].find(x=>x.dataset.w===d.dataset.v);if(old){old.classList.remove('used');old.disabled=false}}d.dataset.v=w;d.textContent=w;d.className='drop';src.classList.add('used');src.classList.remove('sel');src.disabled=true;selected=null}
+root.querySelector('.resetCat').onclick=()=>{selected=null;root.querySelectorAll('#catBank .token').forEach(x=>{x.classList.remove('sel','used');x.disabled=false});root.querySelectorAll('[data-ex="1"] .drop').forEach(d=>{delete d.dataset.v;d.textContent='';d.className='drop empty'});completed.delete('1');update();root.querySelector('[data-ex="1"] .feedback').textContent=''};
+
+function buildMcq(id,items){const box=root.querySelector(id);items.forEach((q,i)=>{const it=document.createElement('div');it.className='qItem';it.dataset.a=q.answer;it.innerHTML='<div class="prompt">'+(i+1)+'. '+q.prompt+'</div><div class="options"></div>';q.options.forEach(o=>{const b=document.createElement('button');b.className='choice';b.textContent=o;b.onclick=()=>{it.querySelectorAll('.choice').forEach(x=>x.classList.remove('sel','correct','wrong'));b.classList.add('sel');if(/^[A-Za-z]/.test(o))speak(o)};it.querySelector('.options').append(b)});box.append(it)})}
+
+buildMcq('#translationExercise',[
+{prompt:'стройный',answer:'slim',options:['slim','bossy','wavy','middle-aged']},{prompt:'разговорчивый',answer:'talkative',options:['talkative','skinny','handsome','green']},{prompt:'рыжие волосы',answer:'ginger',options:['ginger','fair','blue','creative']},{prompt:'среднего роста',answer:'of average height',options:['of average height','short','muscular','pretty']},{prompt:'упрямый',answer:'stubborn',options:['stubborn','friendly','energetic','young']},{prompt:'кудрявые волосы',answer:'curly',options:['curly','straight','dark','small']},{prompt:'щедрый',answer:'generous',options:['generous','selfish','shy','boring']},{prompt:'путешествия',answer:'travelling',options:['travelling','drawing','music','cinema']},{prompt:'мускулистый',answer:'muscular',options:['muscular','slim','talkative','wavy']},{prompt:'светлые волосы',answer:'fair',options:['fair','ginger','blue','bossy']}
+]);
+
+buildMcq('#comparativeMcq',[
+{prompt:'Tom is ___ than Ben. (tall)',answer:'taller',options:['taller','more tall','the tallest','tallest']},{prompt:'This film is ___ than that film. (exciting)',answer:'more exciting',options:['excitinger','more exciting','the most exciting','most exciting']},{prompt:'Anna is the ___ person in our class. (funny)',answer:'funniest',options:['funnier','funniest','most funny','more funny']},{prompt:'Today is ___ than yesterday. (good)',answer:'better',options:['gooder','better','best','more good']},{prompt:'This is the ___ result. (bad)',answer:'worst',options:['worse','badder','worst','most bad']},{prompt:'My bag is ___ than yours. (big)',answer:'bigger',options:['biger','bigger','more big','the biggest']},{prompt:'Kate speaks ___ than Tom. (clearly)',answer:'more clearly',options:['clearer','more clearly','most clearly','clearlier']},{prompt:'This is the ___ book here. (interesting)',answer:'most interesting',options:['more interesting','interestingest','most interesting','the most interesting']}
+]);
+
+const buildersData=[
+{ru:'Том выше Бена.',answer:'Tom is taller than Ben.',words:['Ben.','taller','Tom','than','is']},
+{ru:'Эта книга интереснее той книги.',answer:'This book is more interesting than that book.',words:['interesting','that','This','than','book.','book','is','more']},
+{ru:'Анна — самая смешная в классе.',answer:'Anna is the funniest in the class.',words:['the','class.','funniest','Anna','in','is','the']},
+{ru:'Сегодня лучше, чем вчера.',answer:'Today is better than yesterday.',words:['than','Today','yesterday.','better','is']}
+];
+const builders=root.querySelector('#builders');
+buildersData.forEach((d,i)=>{const box=document.createElement('div');box.className='builder';box.dataset.a=d.answer;box.innerHTML='<div class="prompt">'+(i+1)+'. '+d.ru+'</div><div class="words"></div><div class="answerLine"></div>';d.words.forEach((w,idx)=>{const b=document.createElement('button');b.className='piece';b.textContent=w;b.dataset.i=idx;b.onclick=()=>{if(b.classList.contains('used'))return;b.classList.add('used');const c=document.createElement('button');c.className='answerChip';c.textContent=w;c.onclick=()=>{c.remove();b.classList.remove('used')};box.querySelector('.answerLine').append(c)};box.querySelector('.words').append(b)});builders.append(box)});
+
+const feelings=[['nervous','нервный'],['furious','в ярости'],['surprised','удивлённый'],['impatient','нетерпеливый'],['unsure','неуверенный'],['bored','скучающий'],['worried','обеспокоенный'],['puzzled','озадаченный']];
+feelings.forEach(([e,r])=>{const b=document.createElement('button');b.className='clickWord';b.textContent=e+' — '+r;b.onclick=()=>speak(e);root.querySelector('#emotionLegend').append(b)});
+const emo=[
+{prompt:'Before an important exam, I often feel ___.',answer:'nervous',options:['nervous','furious','bored','surprised']},
+{prompt:'He has been waiting for the bus for 40 minutes. He is ___.',answer:'impatient',options:['impatient','puzzled','surprised','bored']},
+{prompt:'I do not understand this question at all. I am ___.',answer:'puzzled',options:['puzzled','furious','nervous','surprised']},
+{prompt:'She got an unexpected present. She was very ___.',answer:'surprised',options:['surprised','bored','worried','impatient']},
+{prompt:'My friend is late and does not answer the phone. I am ___.',answer:'worried',options:['worried','bored','furious','surprised']},
+{prompt:'This film is very slow. I am ___.',answer:'bored',options:['bored','unsure','furious','nervous']},
+{prompt:'I do not know which answer is correct. I am ___.',answer:'unsure',options:['unsure','impatient','furious','surprised']},
+{prompt:'Someone broke my new phone. I am ___.',answer:'furious',options:['furious','puzzled','bored','nervous']},
+{prompt:'He has sweaty palms before speaking in class. He is ___.',answer:'nervous',options:['nervous','bored','surprised','furious']},
+{prompt:'She keeps tapping her foot while waiting. She is ___.',answer:'impatient',options:['impatient','worried','puzzled','surprised']},
+{prompt:'Tom keeps scratching his head because he cannot solve the task. He is ___.',answer:'puzzled',options:['puzzled','bored','furious','unsure']},
+{prompt:'Mia raises her eyebrows when she sees the huge cake. She is ___.',answer:'surprised',options:['surprised','worried','impatient','bored']},
+{prompt:'I have nothing to do for two hours. I am ___.',answer:'bored',options:['bored','nervous','furious','puzzled']},
+{prompt:'He is not certain whether he should go. He is ___.',answer:'unsure',options:['unsure','surprised','impatient','furious']},
+{prompt:'My little brother lost my headphones again. I am ___.',answer:'furious',options:['furious','worried','bored','surprised']}
+];
+buildMcq('#emotion1',emo.slice(0,8));buildMcq('#emotion2',emo.slice(8));
+
+function checkMcq(sec,id){const qs=[...sec.querySelectorAll('.qItem')];let ok=0;qs.forEach(q=>{const s=q.querySelector('.choice.sel');q.querySelectorAll('.choice').forEach(x=>x.classList.remove('correct','wrong'));if(s&&s.textContent.trim()===q.dataset.a){s.classList.add('correct');ok++}else if(s)s.classList.add('wrong')});const f=sec.querySelector('.feedback');if(ok===qs.length){f.textContent='✓ Всё правильно!';f.className='feedback ok';completed.add(id)}else{f.textContent='Правильно: '+ok+' из '+qs.length+'. Исправь красные ответы.';f.className='feedback no';completed.delete(id)}update()}
+function checkCat(sec){const ds=[...sec.querySelectorAll('.drop')];let ok=0;ds.forEach(d=>{d.classList.remove('correct','wrong');const src=[...root.querySelectorAll('#catBank .token')].find(x=>x.dataset.w===d.dataset.v);if(src&&src.dataset.cat===d.dataset.cat){d.classList.add('correct');ok++}else d.classList.add('wrong')});const f=sec.querySelector('.feedback');if(ok===ds.length){f.textContent='✓ Всё правильно!';f.className='feedback ok';completed.add('1')}else{f.textContent='Правильно: '+ok+' из '+ds.length+'.';f.className='feedback no';completed.delete('1')}update()}
+function checkBuilders(sec){const bs=[...sec.querySelectorAll('.builder')];let ok=0;bs.forEach(b=>{const line=b.querySelector('.answerLine');line.classList.remove('correct','wrong');const text=[...line.querySelectorAll('.answerChip')].map(x=>x.textContent).join(' ').replace(/\s+([.?!])/g,'$1');if(text===b.dataset.a){line.classList.add('correct');ok++}else line.classList.add('wrong')});const f=sec.querySelector('.feedback');if(ok===bs.length){f.textContent='✓ Всё правильно!';f.className='feedback ok';completed.add('4')}else{f.textContent='Правильно: '+ok+' из '+bs.length+'.';f.className='feedback no';completed.delete('4')}update()}
+root.querySelectorAll('.check').forEach(b=>b.onclick=()=>{const s=b.closest('.exercise'),id=s.dataset.ex;if(id==='1')checkCat(s);else if(id==='4')checkBuilders(s);else checkMcq(s,id)});
+
+const floatingTranslation=root.querySelector('#translationPop');
+document.addEventListener('click',()=>{floatingTranslation.style.display='none';});
+window.addEventListener('scroll',()=>{floatingTranslation.style.display='none';},{passive:true});
+window.addEventListener('resize',()=>{floatingTranslation.style.display='none';});
+
+update();
+})();
+</script>
+</body>
+</html>
